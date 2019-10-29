@@ -15,7 +15,12 @@ My final application leveraged the Checkout snippet generator to tie directly to
 ## Some Quick Notes on Functionality:
 Realistically, Leah’s Nap Emporium leaves much to be desired in terms of functionality. There is a lot of hard coding where there should be dynamic functions. For example, the Stripe checkout button is hardcoded for a single product SKU. While homepage can dynamically display elements from the ItemForSale class in a table, the “Pay Now” button will always take you to Checkout for the same product. Given unlimited time (and probably a nap) I feel confident I’d be able to figure out how to remedy a lot of this. In the real world, I would have pseudo-coded and wireframed the workflows I struggled with and asked the software engineers for help. Another example of desired workflow vs. actual is available under workflowstructure.png. 
 
-Extending the Application
+## Extending the Application
 
 Future development of this application would include a backend connection between the class and the Stripe product list. i.e. when a new ItemForSale is added via terminal or through the /admin site the details would automatically push to Stripe products.
 Some additional features to include in the future would include a search function, the ability to add multiple items to a cart, category filters, and the ability to directly view item details.
+
+### Creator Information
+Leah Newman
+leahcnewman@gmail.com
+Last Update: October 29, 2019
