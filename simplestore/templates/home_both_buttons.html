@@ -1,0 +1,101 @@
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Items</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">  
+   </head>
+  <body>
+    <div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active">Items</li>
+      </ol>
+      <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+	    <th>Item Name</th>
+	    <th>Description</th>
+	    <th>Price (USD)</th>
+	    <th> Purchase Button</th>
+        <th> Stripe Button </th>
+	   </tr>
+        </thead>
+        <tbody>
+	   {% for item in items %}
+	   <tr>
+	     <td>
+      		{{ item.name }}
+	     </td>
+	     <td>
+                {{ item.description }} 
+             </td>
+	     <td class="align-middle">
+                {{ item.price }} 
+             </td>
+	     <td>
+        <form action="{% url 'charge' %}" method="post">
+                 {% csrf_token %}
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    			data-key="pk_test_PsJGYuXFKEnnhvlEWaDbprTv00TW553xbp"
+    			data-description= {{ item.name }}
+    			data-amount={{ item.price_for_stripe }}
+    			data-locale="auto">
+		</script>
+        </form>
+         </td>
+         <td>
+             <!-- Load Stripe.js on your website. -->
+             <script src="https://js.stripe.com/v3"></script>
+             
+             <!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
+             <button
+                 style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+                 id="checkout-button-sku_G4peH1gWT5Gfy9"
+                 role="link"
+                 >
+                 Checkout
+             </button>
+             
+             <div id="error-message"></div>
+             
+             <script>
+                 (function() {
+                  var stripe = Stripe('pk_test_PsJGYuXFKEnnhvlEWaDbprTv00TW553xbp');
+                  
+                  var checkoutButton = document.getElementById('checkout-button-sku_G4peH1gWT5Gfy9');
+                  checkoutButton.addEventListener('click', function () {
+                                                  // When the customer clicks on the button, redirect
+                                                  // them to Checkout.
+                                                  stripe.redirectToCheckout({
+                                                                            items: [{sku: 'sku_G4peH1gWT5Gfy9', quantity: 1}],
+                                                                            
+                                                                            // Do not rely on the redirect to the successUrl for fulfilling
+                                                                            // purchases, customers may not always reach the success_url after
+                                                                            // a successful payment.
+                                                                            // Instead use one of the strategies described in
+                                                                            // https://stripe.com/docs/payments/checkout/fulfillment
+                                                                            successUrl: 'http://127.0.0.1:8000/charge/?session_id={CHECKOUT_SESSION_ID}',
+                                                                            cancelUrl: 'https://your-website.com/canceled',
+                                                                            })
+                                                  .then(function (result) {
+                                                        if (result.error) {
+                                                        // If `redirectToCheckout` fails due to a browser or network
+                                                        // error, display the localized error message to your customer.
+                                                        var displayError = document.getElementById('error-message');
+                                                        displayError.textContent = result.error.message;
+                                                        }
+                                                        });
+                                                  });
+                  })();
+                 </script>
+             </td>
+	   </tr>
+    	    {% endfor %}
+</tbody>
+      </table>
+    </div>
+
+  </body>
+</html>
+
+

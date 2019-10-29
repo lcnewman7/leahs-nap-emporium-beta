@@ -1,0 +1,45 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Payment Successful</title>
+        <meta name="description" content="Success Page for Stripe Demo" />
+        
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="css/normalize.css" />
+        <link rel="stylesheet" href="css/global.css" />
+    </head>
+    
+    <body>
+        <div class="sr-root">
+            <div class="sr-main">
+                <header class="sr-header">
+                    <div class="sr-header__logo"></div>
+                </header>
+                <div class="sr-payment-summary completed-view">
+                    <h1>Your payment succeeded, enjoy your nap</h1>
+                    <script>
+                        function getURL() {
+                            alert( window.location.href);
+                        }
+                    </script>
+                    
+                    <button type="button" onclick="getURL();">Show Session ID</button>
+                    <h4>
+                        
+                    </h4>
+                </div>
+            </div>
+            <div class="sr-content">
+                <div class="pasha-image-stack">
+                    <img
+                    src="http://giphygifs.s3.amazonaws.com/media/JWCahAf61Z43e/giphy.gif"
+                    width="360"
+                    height="168"
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
